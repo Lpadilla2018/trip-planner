@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md">
+      <table class="table">
+        <caption>
+          <b><strong>Trip Information</strong></b>
+        </caption>
+        <thead class="thead-dark">
+          <tr>
+            <th>Place</th>
+            <th>Amount of Days</th>
+            <th>Cost Per Day</th>
+            <th>Cost For Food</th>
+            <th>Cost For Transportation</th>
+            <th>Cost For Attractions</th>
+            <th>Total Cost {{ updateTotal() | currency }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of myDestinationList; let i = index">
+            <!--name  -->
+            <td>
+              {{ item.name }}
+            </td>
+            <!-- how many days -->
+            <td>
+              <input [(ngModel)]="item.days" size="2" class="rounded" />
+            </td>
+            <!-- cost per day -->
+            <td>
+              {{
+                item.cost.food +
+                  item.cost.transportation +
+                  item.cost.attractions | currency
+              }}
+            </td>
+            <!-- cost for food -->
+            <td>
+              {{ item.cost.food | currency }}
+            </td>
+
+            <!-- cost for transportation -->
+            <td>
+              {{ item.cost.transportation | currency }}
+            </td>
+
+            <!-- cost for attraction -->
+            <td>
+              {{ item.cost.attractions | currency }}
+            </td>
+
+            <td>
+              <button class="btn btn-danger" (click)="confirmDelete(i)">
+                Remove
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="1">
+              <!-- total cost of trip -->
+              <button class="btn btn-primary" (click)="getDestinations()">
+                Load
+              </button>
+            </th>
+
+            <th colspan="6">
+              <button (click)="saveTrip()" class="btn btn-success">Save</button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<p>
+  google-data-view works!
+</p>
+
+<br>
+
+
+<!-- <div (drop)="onDrop($event, dropData)" (dragover)="allowDrop($event)"> Drop Here</div>
+<div >
+    <h2>Places to go:</h2>
+    <ul id="placesToGo" *ngFor="let item of destination; let i = index">
+      <li draggable="true" (dragstart)="onDragStart($event, dragData)" >{{item.name}}</li>
+    </ul>
+</div> -->
+<br>
+
+
+<section id="src">
+    <h2>Places to go:</h2>
+    <ul id="placesToGo" *ngFor="let item of destination; let i = index">
+      <li draggable="true">{{item.name}}</li>
+    </ul>
+</section>
+
+
+<div class="dropList" id="myTrip">
+    <fieldset>
+        <legend>Where I want to go:</legend>
+        <ul class="target" id="destination">
+
+        </ul>
+    </fieldset>
+</div>
+<!-- <section id="destination">
+  <h2>Where I want to go:</h2>
+
+
+</section> -->
+
+<p id="msg">Drop over the targets</p>
+
+<!-- <section id="destination">
+  <h2> Drag a destination for your next trip!</h2>
+  <ul id="destinationList" *ngFor="let item of destination; let i = index">
+    <li draggable="true">{{item.name}}</li>
+    <li>{{item.cost.food | currency }}</li>
+  </ul>
+
+</section> -->
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-10">
+      <!--Main Content-->
+
+
+      <table>
+        <caption><b>My Trip</b></caption>
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Amount of Days</th>
+            <th>Cost Per Day</th>
+            <th>Cost For Food</th>
+            <th>Cost For Transportation</th>
+            <th>Cost For Attractions</th>
+            <th>Total Cost </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of destination; let i = index">
+            <!--name  -->
+            <td>
+              {{item.name}}
+            </td>
+            <!-- how many days -->
+            <td>
+              <input [(ngModel)]="item.days" size="2" class='rounded'>
+            </td>
+            <!-- cost per day -->
+            <td>
+              {{item.cost.food + item.cost.transportation + item.cost.attractions | currency}}
+            </td>
+            <!-- cost for food -->
+            <td>
+
+            </td>
+
+            <!-- cost for transportation -->
+            <td>
+
+            </td>
+
+            <!-- cost for attraction -->
+            <td>
+
+            </td>
+
+
+            <td>
+              <button class="btn btn-danger" (click)="removeBook(i)">
+                Remove
+              </button>
+            </td>
+          </tr>
+          <tr>
+            
+            <th colspan="3"><button (click)="saveTrip()" class="btn btn-primary">
+                Save
+              </button></th>
+            <th>
+<!-- total cost of trip -->
+              
+            </th>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<button (click)="getDestinations()">Click Me</button>

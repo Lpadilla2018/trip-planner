@@ -1,0 +1,33 @@
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+<section>
+  <agm-map
+    [zoom]="zoomLevel"
+    [mapTypeControl]="true"
+    [latitude]="lat"
+    [longitude]="lng"
+    (mapClick)="changeLocation($event)"
+  >
+    <agm-marker
+      (markerClick)="setLocation(location.lat, location.long)"
+      [latitude]="location.lat"
+      [longitude]="location.long"
+      *ngFor="let location of myDestinationList; let i = index"
+    >
+      <agm-info-window>
+        <strong>Destination: {{ location.name }}</strong>
+        <p>
+          Total Cost:
+          {{
+            location.cost.food +
+              location.cost.transportation +
+              location.cost.attractions | currency
+          }}
+        </p>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</section>

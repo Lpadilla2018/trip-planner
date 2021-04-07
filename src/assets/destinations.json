@@ -1,0 +1,16 @@
+[
+    {"id": 1, "name": "Disney Land", "lat": 33.8121, "long":-117.9190, "days": 1,
+        "cost": {"food": 60.00, "transportation": 100.00, "attractions": 100.00}
+         },
+    {"id": 2, "name": "Paris", "lat": 48.8566, "long": 2.3522, "days": 1,
+        "cost": {"food": 80.00, "transportation": 30.00, "attractions": 40.00}
+         },
+    {"id": 3, "name": "Grand Canyon", "lat": 36.106964, "long": -112.112999, "days": 1,
+        "cost": {"food": 30.00, "transportation": 15.00, "attractions": 30.00}
+         },
+    {"id": 4, "name": "Tokyo", "lat": 35.6895, "long": 139.6917, "days": 1,
+        "cost": {"food": 65.00, "transportation": 30.00, "attractions": 150.00}
+         }
+ ]
+
+ 

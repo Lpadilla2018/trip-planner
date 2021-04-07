@@ -1,0 +1,170 @@
+import { Component, OnInit } from '@angular/core';
+
+// import destination data
+import { DestinationsService } from '../services/destinations.service';
+
+import { Destination } from '../services/destinations';
+
+
+
+@Component({
+  selector: 'app-google-data-view',
+  templateUrl: './google-data-view.component.html',
+  styleUrls: ['./google-data-view.component.css'],
+
+})
+export class GoogleDataViewComponent implements OnInit {
+
+  destination: Destination[];
+  placesToGo: any;
+  destinationList: any;
+  target = document.getElementById("myTrip");
+  src = document.getElementById("src");
+
+  constructor(private destinationService: DestinationsService) {
+
+  }
+
+  ngOnInit() {
+    this.getDestinations()
+    this.target = document.getElementById("myTrip");
+    this.src = document.getElementById("src");
+
+
+    // var target = document.getElementById("myTrip")
+
+
+    //  source event
+    this.src.ondragstart = this.dragStartHandler;
+    this.src.ondragend = this.dragEndHandler;
+    this.src.ondrag = this.dragHandler;
+
+    // target event
+    this.target.ondragenter = this.dragEnterHandler;
+    this.target.ondragover = this.dragOverHandler;
+    this.target.ondrop = this.dropHandler;
+
+
+
+  }
+
+  // onDragStart(event, data) {
+  //   event.dataTransfer.setData('data', data);
+  // }
+  // onDrop(event, data) {
+  //   let dataTransfer = event.dataTransfer.getData('data');
+  //   event.preventDefault();
+  // }
+  //  allowDrop(event) {
+  //   event.preventDefault();
+  // }
+
+
+
+
+  dragStartHandler(e) {
+    e.dataTransfer.setData("Text", e.target.innerHTML);
+    var sourceId = e.target.innerHTML;     // explicitly for some browsers
+    console.log(sourceId)
+
+
+  }
+
+  dragEndHandler(e) {
+    var elems = document.querySelectorAll(".dragged");
+    for (var i = 0; i < elems.length; i++) {
+      elems[i].classList.remove("dragged");
+    }
+
+  }
+
+  dragHandler(e) {
+    var msg = document.getElementById("msg");
+    // msg.innerHTML = "Dragging ";
+
+
+  }
+
+  dragEnterHandler(e) {
+    console.log("Drag Entering " + e.target.id +
+      " source is " + e.dataTransfer.getData("Text"));
+    var sourceId = e.target.innerHTML;
+    var id = e.dataTransfer.getData("text") || sourceId;
+    if (id == "Bernie Sanders") {
+      e.preventDefault();
+      console.log("source ID is OK!");
+
+    }
+  }
+
+  dropHandler(e) {
+    var sourceId = e.target.innerHTML;
+    console.log("Drop on " + e.target.id +
+      " source is " + e.dataTransfer.getData("Text"));
+
+    var id = e.dataTransfer.getData("text") || sourceId;
+    var sourceElement = document.getElementById(id);
+
+    // set clone to true to bring in value to target
+    var newElement = sourceElement.cloneNode(true);
+    // target.innerHTML = "";
+    this.target.appendChild(newElement);
+
+    e.preventDefault();
+
+  }
+
+  dragOverHandler(e) {
+    console.log("Drag Over " + e.target.id +
+      " source is " + e.dataTransfer.getData("Text"));
+
+    
+  }
+  getDestinations(): void {
+    this.destinationService
+      .getDestinations()
+      .subscribe(result => {
+        console.log(result);
+        this.destination = result
+      });
+  }
+
+}
+
+
+
+
+
+
+
+
+// draggable section
+
+
+  // dragStartHandler(e: any): void{
+  //   e.dataTransfer.setData("Text", e.target.innerHTML);
+  //       let sourceId = e.target.innerHTML;     // explicitly for some browsers
+  //       console.log(sourceId)
+
+
+  // }
+
+  // dragEndHandler(e: any): void{
+
+
+  // }
+
+  // dragHandler(e: any): void{
+
+
+  // }
+
+  // dragEnter(e: any): void{
+
+
+  // }
+
+  // dropHandler(e: any): void{
+
+
+  // }
